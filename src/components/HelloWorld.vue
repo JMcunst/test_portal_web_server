@@ -27,6 +27,11 @@
       <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
+    <div>
+      <h1>this is Home page</h1>
+      <p>COUNT:{{cnt}}, ONE:{{data1}}, TWO:{{data2}}, THREE:{{data3}}</p>
+      <button v-on:click="dataupdate()">click</button>
+  </div>
   </div>
 </template>
 
@@ -35,7 +40,63 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  data(){
+    return {
+      data1: 0,
+      data2: 0,
+      data3: 0,
+      cnt: 1
+    }
+  },
+  computed: {
+    titleComputed() {
+      console.log('I change when this.property changes.')
+      return this.property
+    }
+  },
+  beforeCreate(){
+    console.log('beforeCreate:',this.data1, this.data2, this.data3);
+  },
+  created(){
+    console.log('created:',this.data1, this.data2, this.data3);
+  },
+  beforeMount(){
+    console.log('beforeMount:',this.data1, this.data2, this.data3);
+  },
+  mounted(){
+    alert("mounted");
+    console.log('mounted:',this.data1, this.data2, this.data3);
+  },
+  beforeUpdate(){
+    alert("beforeUpdate");
+    console.log('beforeUpdate:',this.data1, this.data2, this.data3);
+  },
+  updated(){
+    alert("updated");
+    console.log('updated:',this.data1, this.data2, this.data3);
+  },
+  beforeDestroy(){
+    alert("beforeDestroy");
+    console.log('beforeDestroy:',this.data1, this.data2, this.data3);
+  },
+  destroyed(){
+    alert("destroyed");
+    console.log('destroyed:',this.data1, this.data2, this.data3);
+  },
+  methods:{
+    dataupdate(){
+      if(this.cnt % 3 == 1){
+        this.data1 += 1;
+      }else if (this.cnt % 3 == 2){
+        this.data2 += 1;
+      }else{
+        this.data3 += 1;
+      }
+      this.cnt += 1;
+    }
   }
+
 }
 </script>
 
